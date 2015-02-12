@@ -12,8 +12,8 @@ RUN apt-get update && apt-get dist-upgrade -yq && \
 	libglib2.0-dev libgpgme11-dev libpcre3-dev libpth-dev libwrap0-dev libgmp-dev libgmp3-dev \	
 	libgpgme11-dev libopenvas2 libpcre3-dev libpth-dev quilt cmake pkg-config \
 	libssh-dev libglib2.0-dev libpcap-dev libgpgme11-dev uuid-dev bison libksba-dev \
-	doxygen sqlfairy xmltoman sqlite3 libsqlite3-dev wamerican \
- 	libmicrohttpd-dev libxml2-dev libxslt1-dev xsltproc libssh2-1-dev libldap2-dev autoconf nmap libgnutls-dev && \
+	doxygen sqlfairy xmltoman sqlite3 libsqlite3-dev wamerican rsyslog \
+ 	libmicrohttpd-dev libxml2-dev libxslt1-dev xsltproc libssh2-1-dev libldap2-dev autoconf nmap libgnutls-dev supervisor && \
     apt-get clean
 
 RUN mkdir -p /usr/src/build/libraries && cd /usr/src/build/libraries && \
@@ -29,7 +29,11 @@ RUN mkdir -p /usr/src/build/libraries && cd /usr/src/build/libraries && \
     curl http://wald.intevation.org/frs/download.php/1934/greenbone-security-assistant-${ASSISTANT_VERSION}.tar.gz | tar zxv --strip-components=1 && \
     mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/usr .. && make install
 
-ADD setup.sh /usr/local/bin/setup.sh
-RUN chmod +x /usr/local/bin/setup.sh
+ADD resources/supervisord.conf /etc/supervisor/supervisord.conf
+ADD bin/* /usr/local/bin/
+RUN chmod +x /usr/local/bin/*
 
-CMD [“/bin/bash”]
+# UI + Scanner ports
+EXPOSE 443 9390 9391
+
+CMD [“/usr/local/bin/run”]
