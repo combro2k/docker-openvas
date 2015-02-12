@@ -8,7 +8,7 @@ ENV MANAGER_VERSION 6.0+beta6
 ENV ASSISTANT_VERSION 6.0+beta6
 
 RUN apt-get update && apt-get dist-upgrade -yq && \
-    apt-get install -yq build-essential devscripts dpatch libassuan-dev \
+    apt-get install -yq libhiredis-dev build-essential devscripts dpatch libassuan-dev \
 	libglib2.0-dev libgpgme11-dev libpcre3-dev libpth-dev libwrap0-dev libgmp-dev libgmp3-dev \	
 	libgpgme11-dev libopenvas2 libpcre3-dev libpth-dev quilt cmake pkg-config \
 	libssh-dev libglib2.0-dev libpcap-dev libgpgme11-dev uuid-dev bison libksba-dev \
