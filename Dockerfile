@@ -29,4 +29,7 @@ RUN mkdir -p /usr/src/build/libraries && cd /usr/src/build/libraries && \
     curl http://wald.intevation.org/frs/download.php/1934/greenbone-security-assistant-${ASSISTANT_VERSION}.tar.gz | tar zxv --strip-components=1 && \
     mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/usr .. && make install
 
+ADD setup.sh /usr/local/bin/setup.sh
+RUN chmod +x /usr/local/bin/setup.sh
+
 CMD [“/bin/bash”]
