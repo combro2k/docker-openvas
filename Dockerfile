@@ -34,6 +34,7 @@ RUN apt-get update && apt-get dist-upgrade -yq && \
 ADD resources/supervisord.conf /etc/supervisor/supervisord.conf
 ADD bin/* /usr/local/bin/
 RUN chmod +x /usr/local/bin/*
+RUN /usr/local/bin/setup.sh
 
 # UI + Scanner ports
 EXPOSE 443 9390 9391
