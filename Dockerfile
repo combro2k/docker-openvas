@@ -36,4 +36,4 @@ RUN chmod +x /usr/local/bin/*
 # UI + Scanner ports
 EXPOSE 443 9390 9391
 
-CMD [“/usr/local/bin/run”]
+CMD ["/usr/local/bin/run"]
