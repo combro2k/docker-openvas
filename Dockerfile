@@ -16,20 +16,20 @@ RUN apt-get update && apt-get dist-upgrade -yq && \
  	libmicrohttpd-dev libxml2-dev libxslt1-dev xsltproc libssh2-1-dev libldap2-dev autoconf nmap libgnutls-dev supervisor && \
     apt-get clean
 
-ENV PKG_CONFIG_PATH /usr/lib/pkgconfig:/opt/lib/pkgconfig
+ENV PKG_CONFIG_PATH /usr/lib/pkgconfig:/opt/openvas/lib/pkgconfig
 
 RUN mkdir -p /usr/src/build/libraries && cd /usr/src/build/libraries && \
     curl http://wald.intevation.org/frs/download.php/1922/openvas-libraries-${LIBRARIES_VERSION}.tar.gz | tar zxv --strip-components=1 && \
-    mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/opt .. && make install && \
+    mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=//opt/openvas/ .. && make install && \
     mkdir -p /usr/src/build/scanner && cd /usr/src/build/scanner && \
     curl http://wald.intevation.org/frs/download.php/1926/openvas-scanner-${SCANNER_VERSION}.tar.gz | tar zxv --strip-components=1 && \
-    mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/opt .. && make install && \
+    mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/opt/openvas/ .. && make install && \
     mkdir -p /usr/src/build/manager && cd /usr/src/build/manager && \
     curl http://wald.intevation.org/frs/download.php/1930/openvas-manager-${MANAGER_VERSION}.tar.gz | tar zxv --strip-components=1 && \
-    mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/opt .. && make install && \
+    mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/opt/openvas/ .. && make install && \
     mkdir -p /usr/src/build/assistant && cd /usr/src/build/assistant && \
     curl http://wald.intevation.org/frs/download.php/1934/greenbone-security-assistant-${ASSISTANT_VERSION}.tar.gz | tar zxv --strip-components=1 && \
-    mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/opt .. && make install
+    mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/opt/openvas/ .. && make install
 
 ADD resources/supervisord.conf /etc/supervisor/supervisord.conf
 ADD bin/* /usr/local/bin/
