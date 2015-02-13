@@ -2,18 +2,18 @@
 
 echo "Starting setup..."
 
-openvas-mkcert -q
+/opt/bin/openvas-mkcert -q
 ldconfig
-openvassd
-openvas-nvt-sync
-openvas-scapdata-sync
-openvas-certdata-sync
-openvas-mkcert-client -n -i
-openvasmd --rebuild
-openvasmd --create-user=admin --role=Admin
-openvasmd --user=admin --new-password=openvas
+/opt/bin/openvassd
+/opt/bin/openvas-nvt-sync
+/opt/bin/openvas-scapdata-sync
+/opt/bin/openvas-certdata-sync
+/opt/bin/openvas-mkcert-client -n -i
+/opt/bin/openvasmd --rebuild
+/opt/bin/openvasmd --create-user=admin --role=Admin
+/opt/bin/openvasmd --user=admin --new-password=openvas
 
 # At this point, usually openvassd locks up so lets kill it
-ps aux | grep openvassd| awk '{print $2}' |xargs kill -9
+kill -9 $(pidof openvassd)
 
 echo "Finished setup..."
