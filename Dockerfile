@@ -16,7 +16,7 @@ RUN apt-get update && apt-get dist-upgrade -yq && \
  	libmicrohttpd-dev libxml2-dev libxslt1-dev xsltproc libssh2-1-dev libldap2-dev autoconf nmap libgnutls-dev supervisor && \
     apt-get clean
 
-RUN export CMAKE_OPT "-DCMAKE_INSTALL_PREFIX=/usr -DLOCALSTATEDIR=/var" && \
+RUN export CMAKE_OPT="-DCMAKE_INSTALL_PREFIX=/usr -DLOCALSTATEDIR=/var" && \
     mkdir -p /usr/src/build/libraries && cd /usr/src/build/libraries && \
     curl http://wald.intevation.org/frs/download.php/1922/openvas-libraries-${LIBRARIES_VERSION}.tar.gz | tar zxv --strip-components=1 && \
     mkdir -p build && cd build && cmake ${CMAKE_OPT} .. && make install && \
