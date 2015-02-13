@@ -29,7 +29,8 @@ RUN mkdir -p /usr/src/build/libraries && cd /usr/src/build/libraries && \
     mkdir -p build && cd build && cmake ${CMAKE_OPT} .. && make install && \
     mkdir -p /usr/src/build/assistant && cd /usr/src/build/assistant && \
     curl http://wald.intevation.org/frs/download.php/1934/greenbone-security-assistant-${ASSISTANT_VERSION}.tar.gz | tar zxv --strip-components=1 && \
-    mkdir -p build && cd build && cmake ${CMAKE_OPT} .. && make install
+    mkdir -p build && cd build && cmake ${CMAKE_OPT} .. && make install && \
+    echo "unixsocket /tmp/redis.sock" >> /etc/redis/redis.conf
 
 ADD resources/supervisord.conf /etc/supervisor/supervisord.conf
 ADD bin/* /usr/local/bin/
