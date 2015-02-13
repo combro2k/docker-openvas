@@ -1,11 +1,11 @@
 FROM ubuntu-debootstrap:14.04
 MAINTAINER Martijn van Maurik <docker@vmaurik.nl>
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV LIBRARIES_VERSION 8.0+beta6
-ENV SCANNER_VERSION 5.0+beta6
-ENV MANAGER_VERSION 6.0+beta6
-ENV ASSISTANT_VERSION 6.0+beta6
+ENV DEBIAN_FRONTEND noninteractive \
+    LIBRARIES_VERSION 8.0+beta6 \
+    SCANNER_VERSION 5.0+beta6 \
+    MANAGER_VERSION 6.0+beta6 \
+    ASSISTANT_VERSION 6.0+beta6
 
 RUN apt-get update && apt-get dist-upgrade -yq && \
     apt-get install -yq rsync libhiredis-dev build-essential devscripts dpatch libassuan-dev \
@@ -14,9 +14,8 @@ RUN apt-get update && apt-get dist-upgrade -yq && \
 	libssh-dev libglib2.0-dev libpcap-dev libgpgme11-dev uuid-dev bison libksba-dev \
 	doxygen sqlfairy xmltoman sqlite3 libsqlite3-dev wamerican rsyslog redis-server \
  	libmicrohttpd-dev libxml2-dev libxslt1-dev xsltproc libssh2-1-dev libldap2-dev autoconf nmap libgnutls-dev supervisor && \
-    apt-get clean
-
-RUN export CMAKE_OPT="-DCMAKE_INSTALL_PREFIX=/usr -DLOCALSTATEDIR=/var" && \
+    apt-get clean && \
+    export CMAKE_OPT="-DCMAKE_INSTALL_PREFIX=/usr -DLOCALSTATEDIR=/var" && \
     mkdir -p /usr/src/build/libraries && cd /usr/src/build/libraries && \
     curl http://wald.intevation.org/frs/download.php/1922/openvas-libraries-${LIBRARIES_VERSION}.tar.gz | tar zxv --strip-components=1 && \
     mkdir -p build && cd build && cmake ${CMAKE_OPT} .. && make install && \
