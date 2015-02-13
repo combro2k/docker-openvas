@@ -6,7 +6,7 @@ ENV LIBRARIES_VERSION 8.0+beta6
 ENV SCANNER_VERSION 5.0+beta6
 ENV MANAGER_VERSION 6.0+beta6
 ENV ASSISTANT_VERSION 6.0+beta6
-ENV PKG_CONFIG_PATH /opt
+ENV PKG_CONFIG_PATH "${PKG_CONFIG_PATH}:/opt"
 
 RUN apt-get update && apt-get dist-upgrade -yq && \
     apt-get install -yq rsync libhiredis-dev build-essential devscripts dpatch libassuan-dev \
