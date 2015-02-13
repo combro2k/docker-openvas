@@ -5,5 +5,6 @@ then
   exec /usr/local/bin/setup.sh
   touch /root/.init
 else
-  /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+  echo "starting..."
+  # /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
 fi
