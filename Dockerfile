@@ -20,7 +20,7 @@ ENV PKG_CONFIG_PATH /usr/lib/pkgconfig:/opt/openvas/lib/pkgconfig
 
 RUN mkdir -p /usr/src/build/libraries && cd /usr/src/build/libraries && \
     curl http://wald.intevation.org/frs/download.php/1922/openvas-libraries-${LIBRARIES_VERSION}.tar.gz | tar zxv --strip-components=1 && \
-    mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=//opt/openvas/ .. && make install && \
+    mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/opt/openvas/ .. && make install && \
     mkdir -p /usr/src/build/scanner && cd /usr/src/build/scanner && \
     curl http://wald.intevation.org/frs/download.php/1926/openvas-scanner-${SCANNER_VERSION}.tar.gz | tar zxv --strip-components=1 && \
     mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/opt/openvas/ .. && make install && \
