@@ -1,15 +1,3 @@
 #!/bin/bash
-
-if [[ ! -f "/root/.init" ]]
-then
-  . /usr/local/bin/setup.sh
-  touch /root/.init
-else
-  echo "Updating ..."
-  /usr/sbin/openvas-nvt-sync
-  /usr/sbin/openvas-scapdata-sync
-  /usr/sbin/openvas-certdata-sync
-fi
-
 echo "starting..."
 /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
