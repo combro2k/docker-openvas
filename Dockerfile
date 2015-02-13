@@ -6,6 +6,7 @@ ENV LIBRARIES_VERSION 8.0+beta6
 ENV SCANNER_VERSION 5.0+beta6
 ENV MANAGER_VERSION 6.0+beta6
 ENV ASSISTANT_VERSION 6.0+beta6
+ENV PKG_CONFIG_PATH /opt
 
 RUN apt-get update && apt-get dist-upgrade -yq && \
     apt-get install -yq rsync libhiredis-dev build-essential devscripts dpatch libassuan-dev \
@@ -16,8 +17,7 @@ RUN apt-get update && apt-get dist-upgrade -yq && \
  	libmicrohttpd-dev libxml2-dev libxslt1-dev xsltproc libssh2-1-dev libldap2-dev autoconf nmap libgnutls-dev supervisor && \
     apt-get clean
 
-RUN export PKG_CONFIG_PATH=/opt && \
-    mkdir -p /usr/src/build/libraries && cd /usr/src/build/libraries && \
+RUN mkdir -p /usr/src/build/libraries && cd /usr/src/build/libraries && \
     curl http://wald.intevation.org/frs/download.php/1922/openvas-libraries-${LIBRARIES_VERSION}.tar.gz | tar zxv --strip-components=1 && \
     mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/opt .. && make install && \
     mkdir -p /usr/src/build/scanner && cd /usr/src/build/scanner && \
