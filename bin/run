@@ -2,7 +2,7 @@
 
 if [[ ! -f "/root/.init" ]]
 then
-  exec /usr/local/bin/setup.sh
+  . /usr/local/bin/setup.sh
   touch /root/.init
 fi
 
